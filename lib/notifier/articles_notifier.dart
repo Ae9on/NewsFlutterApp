@@ -3,6 +3,10 @@ import 'package:newsapp/data/models/article.dart';
 import 'package:newsapp/data/repository.dart';
 import 'package:newsapp/notifier/base.dart';
 
+final articlesNotifier =
+    NotifierProvider<ArticlesNotifier, Response<List<Article>>>(
+        () => ArticlesNotifier());
+
 class ArticlesNotifier extends Notifier<Response<List<Article>>> {
   late DataRespository respository;
 
@@ -22,6 +26,6 @@ class ArticlesNotifier extends Notifier<Response<List<Article>>> {
   Response<List<Article>> build() {
     respository = ref.read(dataRepositoryProvider);
     fetch();
-    return Response.empty();
+    return Response.progress();
   }
 }

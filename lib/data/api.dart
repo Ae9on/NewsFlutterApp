@@ -21,8 +21,10 @@ class NewsApi {
   Future<List<Article>> articles(String keywords, String from, String sortBy) =>
       _dio.get('everything', queryParameters: {
         'q': keywords,
-        'from': from,
         'sortBy': sortBy,
-      }).then((value) =>
-          List.from(value.data).map((e) => Article.fromJson(e)).toList());
+        'from': from,
+        'apiKey': 'e5b33812714c45c08398629e63de1076'
+      }).then((value) => List.from(value.data['articles'])
+          .map((e) => Article.fromJson(e))
+          .toList());
 }

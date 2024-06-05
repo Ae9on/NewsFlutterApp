@@ -20,6 +20,9 @@ class DataRespositoryImp implements DataRespository {
   @override
   Future<List<Article>> articles(
           List<String> keywords, DateTime from, ArticleSortBy sortBy) =>
-      api.articles(keywords.join('OR'), from.toIso8601String().split('T').first,
-          sortBy.name);
+      api
+          .articles(keywords.join(' OR '),
+              from.toIso8601String().split('T').first, sortBy.name)
+          .then((value) =>
+              value.where((element) => element.title != '[Removed]').toList());
 }
