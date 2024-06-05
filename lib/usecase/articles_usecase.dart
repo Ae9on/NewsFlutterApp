@@ -1,5 +1,4 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:newsapp/data/api.dart';
 import 'package:newsapp/data/models/article.dart';
 import 'package:newsapp/data/repository.dart';
 
