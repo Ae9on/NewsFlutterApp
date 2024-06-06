@@ -15,6 +15,7 @@ class ArticlesNotifier extends Notifier<Response<List<Article>>> {
     respository.articles(
         ['Microsoft', 'Apple', 'Google', 'Tesla'],
         DateTime.now().subtract(const Duration(days: 1)),
+        DateTime.now(),
         ArticleSortBy.publishedAt).then((value) {
       state = Response.success(data: value);
     }).catchError((e) {

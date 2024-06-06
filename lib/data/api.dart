@@ -18,11 +18,14 @@ class NewsApi {
   final Dio _dio;
   NewsApi(this._dio);
 
-  Future<List<Article>> articles(String keywords, String from, String sortBy) =>
+  Future<List<Article>> articles(
+          String keywords, String from, String to, String sortBy) =>
       _dio.get('everything', queryParameters: {
         'q': keywords,
         'sortBy': sortBy,
         'from': from,
+        'to': to,
+        'language': 'en',
         'apiKey': 'e5b33812714c45c08398629e63de1076'
       }).then((value) => List.from(value.data['articles'])
           .map((e) => Article.fromJson(e))

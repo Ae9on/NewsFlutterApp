@@ -10,6 +10,6 @@ class ArticlesUseCase {
   ArticlesUseCase(this.repo);
   Future<List<Article>> call(
       List<String> keywords, DateTime from, ArticleSortBy sortBy) {
-    return repo.articles(keywords, from, sortBy);
+    return repo.articles(keywords, from, from, sortBy);
   }
 }
