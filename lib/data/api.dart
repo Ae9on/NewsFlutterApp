@@ -26,6 +26,7 @@ class NewsApi {
         'from': from,
         'to': to,
         'language': 'en',
+        'pageSize': 5,
         'apiKey': 'e5b33812714c45c08398629e63de1076'
       }).then((value) => List.from(value.data['articles'])
           .map((e) => Article.fromJson(e))

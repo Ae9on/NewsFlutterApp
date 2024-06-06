@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:newsapp/data/models/article.dart';
+import 'package:newsapp/notifier/article_viewmodel.dart';
 import 'package:newsapp/view/article_cover.dart';
-import 'package:newsapp/view/articles_screen.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 class ArticleItem extends StatelessWidget {
@@ -10,7 +9,7 @@ class ArticleItem extends StatelessWidget {
     required this.data,
   });
 
-  final Article data;
+  final ArticleViewModel data;
 
   @override
   Widget build(BuildContext context) {
@@ -18,9 +17,31 @@ class ArticleItem extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(16),
-          child: ArticleCover(uri: data.urlToImage ?? ''),
+        Stack(
+          children: [
+            Hero(
+                tag: data,
+                child: ArticleCover(uri: data.article.urlToImage ?? '')),
+            Positioned(
+              left: 10,
+              top: 10,
+              child: Container(
+                padding: const EdgeInsets.only(
+                    right: 12, left: 12, top: 2, bottom: 2),
+                decoration: const BoxDecoration(
+                    color: Colors.deepPurple,
+                    borderRadius: BorderRadius.all(Radius.circular(32))),
+                child: Text(
+                  data.category,
+                  textAlign: TextAlign.start,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 14,
+                      color: Colors.white),
+                ),
+              ),
+            ),
+          ],
         ),
         const SizedBox(
           height: 8,
@@ -35,7 +56,7 @@ class ArticleItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(data.source?.name ?? '',
+                  Text(data.article.source?.name ?? '',
                       style: const TextStyle(
                           fontWeight: FontWeight.w400,
                           color: Colors.black45,
@@ -43,7 +64,9 @@ class ArticleItem extends StatelessWidget {
                   const SizedBox(
                     width: 2,
                   ),
-                  Text(timeago.format(DateTime.parse(data.publishedAt ?? '')),
+                  Text(
+                      timeago.format(
+                          DateTime.parse(data.article.publishedAt ?? '')),
                       style: const TextStyle(
                           fontWeight: FontWeight.w400,
                           color: Colors.black45,
@@ -54,10 +77,13 @@ class ArticleItem extends StatelessWidget {
                 height: 6,
               ),
               Text(
-                data.title ?? '',
+                data.article.title ?? '',
                 textAlign: TextAlign.start,
                 style:
                     const TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
+              ),
+              const SizedBox(
+                height: 6,
               ),
             ],
           ),

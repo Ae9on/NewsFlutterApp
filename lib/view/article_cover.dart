@@ -10,18 +10,21 @@ class ArticleCover extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AspectRatio(
-        aspectRatio: 16 / 9,
-        child: FadeInImage.assetNetwork(
-          image: uri,
-          imageErrorBuilder: (ctx, _, e) {
-            return Image.asset(
-              'assets/placeholder.png',
-              fit: BoxFit.cover,
-            );
-          },
-          placeholder: 'assets/placeholder.png',
-          fit: BoxFit.cover,
-        ));
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(16),
+      child: AspectRatio(
+          aspectRatio: 16 / 9,
+          child: FadeInImage.assetNetwork(
+            image: uri,
+            imageErrorBuilder: (ctx, _, e) {
+              return Image.asset(
+                'assets/placeholder.png',
+                fit: BoxFit.cover,
+              );
+            },
+            placeholder: 'assets/placeholder.png',
+            fit: BoxFit.cover,
+          )),
+    );
   }
 }

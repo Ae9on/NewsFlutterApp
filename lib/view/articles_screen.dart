@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:newsapp/notifier/articles_notifier.dart';
+import 'package:newsapp/view/article_datail_screen.dart';
 import 'package:newsapp/view/article_item.dart';
 
 class ArticlesScreen extends ConsumerWidget {
@@ -34,7 +35,17 @@ class ArticlesScreen extends ConsumerWidget {
                 );
               },
               itemBuilder: (ctx, index) {
-                return ArticleItem(data: state.data![index]);
+                return GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ArticleDetailScreen(
+                              data: state.data![index].article),
+                        ),
+                      );
+                    },
+                    child: ArticleItem(data: state.data![index]));
               })
           : (state.isProgress())
               ? const Center(

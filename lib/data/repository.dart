@@ -9,7 +9,7 @@ final dataRepositoryProvider = Provider<DataRespository>((ref) {
 
 abstract class DataRespository {
   Future<List<Article>> articles(
-      List<String> keywords, DateTime from, DateTime to, ArticleSortBy sortBy);
+      String keywords, DateTime from, DateTime to, ArticleSortBy sortBy);
 }
 
 class DataRespositoryImp implements DataRespository {
@@ -18,14 +18,11 @@ class DataRespositoryImp implements DataRespository {
   DataRespositoryImp(this.api);
 
   @override
-  Future<List<Article>> articles(List<String> keywords, DateTime from,
-          DateTime to, ArticleSortBy sortBy) =>
+  Future<List<Article>> articles(
+          String keywords, DateTime from, DateTime to, ArticleSortBy sortBy) =>
       api
-          .articles(
-              keywords.join(' OR '),
-              from.toIso8601String().split('T').first,
-              to.toIso8601String().split('T').first,
-              sortBy.name)
+          .articles(keywords, from.toIso8601String().split('T').first,
+              to.toIso8601String().split('T').first, sortBy.name)
           .then((value) =>
               value.where((element) => element.title != '[Removed]').toList());
 }

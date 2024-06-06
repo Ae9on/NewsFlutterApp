@@ -15,13 +15,6 @@ class ArticleDetailScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: const Center(
-          child: Text(
-            'Continue Reading',
-            style: TextStyle(
-                color: Colors.deepPurple, fontWeight: FontWeight.w500),
-          ),
-        ),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -34,15 +27,30 @@ class ArticleDetailScreen extends ConsumerWidget {
                 data.title ?? '',
                 textAlign: TextAlign.start,
                 style:
-                    const TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
+                    const TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
               ),
+              const SizedBox(
+                height: 4,
+              ),
+              if (data.author != null)
+                Row(
+                  children: [
+                    const Text('Written by ',
+                        style: TextStyle(
+                            fontWeight: FontWeight.w400,
+                            color: Colors.black45,
+                            fontSize: 14)),
+                    Text(data.author!,
+                        style: const TextStyle(
+                            fontWeight: FontWeight.w400,
+                            color: Colors.deepPurple,
+                            fontSize: 14)),
+                  ],
+                ),
               const SizedBox(
                 height: 8,
               ),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(16),
-                child: ArticleCover(uri: data.urlToImage ?? ''),
-              ),
+              Hero(tag: data, child: ArticleCover(uri: data.urlToImage ?? '')),
               const SizedBox(
                 height: 8,
               ),
@@ -73,6 +81,15 @@ class ArticleDetailScreen extends ConsumerWidget {
                     ),
                   ],
                 ),
+              ),
+              const SizedBox(
+                height: 12,
+              ),
+              Text(
+                data.content ?? '',
+                textAlign: TextAlign.start,
+                style:
+                    const TextStyle(fontWeight: FontWeight.w400, fontSize: 14),
               ),
             ],
           ),
