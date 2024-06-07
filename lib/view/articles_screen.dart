@@ -9,7 +9,7 @@ import 'package:newsapp/view/common/state_view.dart';
 class ArticlesScreen extends HookConsumerWidget {
   const ArticlesScreen({super.key});
 
-  static const keyWords = ['Microsoft', 'Apple', 'Google', 'Tesla'];
+  static const keyWords = ['Microsoft'];
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -41,7 +41,9 @@ class ArticlesScreen extends HookConsumerWidget {
           child: Text(
             'NewsFeed',
             style: TextStyle(
-                color: Colors.deepPurple, fontWeight: FontWeight.w500),
+                color: Colors.deepPurple,
+                fontWeight: FontWeight.w600,
+                fontSize: 24),
           ),
         ),
       ),
@@ -53,7 +55,7 @@ class ArticlesScreen extends HookConsumerWidget {
                 Expanded(
                   child: ListView.separated(
                       controller: scrollController,
-                      padding: const EdgeInsets.all(12),
+                      padding: const EdgeInsets.all(16),
                       itemCount: notifier.data.length,
                       separatorBuilder: (ctx, index) {
                         return Padding(
@@ -71,7 +73,7 @@ class ArticlesScreen extends HookConsumerWidget {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => ArticleDetailScreen(
-                                      data: notifier.data[index].article),
+                                      data: notifier.data[index]),
                                 ),
                               );
                             },

@@ -28,7 +28,6 @@ class ArticlesParams {
     data["pageSize"] = pageSize;
     data["language"] = language;
     data["sortBy"] = sortBy?.name;
-    data['apiKey'] = 'f1a159e96d5e4117b87411b14bc2007f';
     return data;
   }
 }

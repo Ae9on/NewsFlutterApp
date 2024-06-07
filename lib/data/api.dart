@@ -17,7 +17,7 @@ final dioProvider = Provider((ref) {
   dio.interceptors.add(PrettyDioLogger());
   dio.interceptors.add(InterceptorsWrapper(onRequest:
       (RequestOptions options, RequestInterceptorHandler handler) async {
-    options.queryParameters['apiKey'] = 'f1a159e96d5e4117b87411b14bc2007f';
+    options.queryParameters['apiKey'] = '4717975602f54f7c963d7137374aeefa';
     return handler.next(options);
   }));
   return dio;

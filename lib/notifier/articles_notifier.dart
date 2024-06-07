@@ -2,7 +2,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:newsapp/data/api.dart';
 import 'package:newsapp/notifier/article_viewmodel.dart';
 import 'package:newsapp/notifier/base.dart';
-import 'package:newsapp/usecase/articles_usecase.dart';
+import 'package:newsapp/usecase/latest_news_usecase.dart';
 
 final articlesNotifier =
     StateNotifierProvider<ArticlesNotifier, Response<List<ArticleViewModel>>>(
@@ -21,7 +21,6 @@ class ArticlesNotifier extends StateNotifier<Response<List<ArticleViewModel>>> {
 
   fetch({List<String> keywords = const []}) async {
     state = Response.progress();
-    isLoading = true;
     if (keywords.isNotEmpty) {
       this.keywords = keywords;
       page = 1;
@@ -31,6 +30,7 @@ class ArticlesNotifier extends StateNotifier<Response<List<ArticleViewModel>>> {
       state = Response.empty();
       return;
     }
+    isLoading = true;
     useCase.call(this.keywords, page).then((value) {
       page++;
       data.addAll(value

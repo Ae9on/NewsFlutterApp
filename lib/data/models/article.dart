@@ -12,7 +12,7 @@ class Article {
   String? description;
   String? url;
   String? urlToImage;
-  String? publishedAt;
+  DateTime? publishedAt;
   String? content;
 
   Article(
@@ -25,31 +25,17 @@ class Article {
       this.publishedAt,
       this.content});
 
-  Article.fromJson(Map<String, dynamic> json) {
-    if (json["source"] is Map) {
-      source = json["source"] == null ? null : Source.fromJson(json["source"]);
-    }
-    if (json["author"] is String) {
-      author = json["author"];
-    }
-    if (json["title"] is String) {
-      title = json["title"];
-    }
-    if (json["description"] is String) {
-      description = json["description"];
-    }
-    if (json["url"] is String) {
-      url = json["url"];
-    }
-    if (json["urlToImage"] is String) {
-      urlToImage = json["urlToImage"];
-    }
-    if (json["publishedAt"] is String) {
-      publishedAt = json["publishedAt"];
-    }
-    if (json["content"] is String) {
-      content = json["content"];
-    }
+  factory Article.fromJson(Map<String, dynamic> json) {
+    return Article(
+      source: json["source"] != null ? Source.fromJson(json["source"]) : null,
+      author: json["author"] as String?,
+      title: json["title"] as String?,
+      description: json["description"] as String?,
+      url: json["url"] as String?,
+      urlToImage: json["urlToImage"] as String?,
+      publishedAt: DateTime.parse(json["publishedAt"]),
+      content: json["content"] as String?,
+    );
   }
 
   Map<String, dynamic> toJson() {

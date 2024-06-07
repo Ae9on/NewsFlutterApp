@@ -20,7 +20,7 @@ class ArticleItem extends StatelessWidget {
         Stack(
           children: [
             Hero(
-                tag: data.article,
+                tag: data,
                 child: ArticleCover(uri: data.article.urlToImage ?? '')),
             Positioned(
               left: 10,
@@ -35,8 +35,8 @@ class ArticleItem extends StatelessWidget {
                   data.category,
                   textAlign: TextAlign.start,
                   style: const TextStyle(
-                      fontWeight: FontWeight.w400,
-                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 14.6,
                       color: Colors.white),
                 ),
               ),
@@ -44,7 +44,7 @@ class ArticleItem extends StatelessWidget {
           ],
         ),
         const SizedBox(
-          height: 8,
+          height: 12,
         ),
         Padding(
           padding: const EdgeInsets.only(right: 6.0, left: 6),
@@ -64,13 +64,11 @@ class ArticleItem extends StatelessWidget {
                   const SizedBox(
                     width: 2,
                   ),
-                  Text(
-                      timeago.format(
-                          DateTime.parse(data.article.publishedAt ?? '')),
+                  Text(timeago.format(data.article.publishedAt!),
                       style: const TextStyle(
                           fontWeight: FontWeight.w400,
                           color: Colors.black45,
-                          fontSize: 13)),
+                          fontSize: 14)),
                 ],
               ),
               const SizedBox(
@@ -79,8 +77,8 @@ class ArticleItem extends StatelessWidget {
               Text(
                 data.article.title ?? '',
                 textAlign: TextAlign.start,
-                style:
-                    const TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
+                style: const TextStyle(
+                    fontWeight: FontWeight.w500, fontSize: 17.5),
               ),
               const SizedBox(
                 height: 6,
