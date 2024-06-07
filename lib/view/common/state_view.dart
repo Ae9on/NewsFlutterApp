@@ -70,12 +70,20 @@ class StateView extends StatelessWidget {
               visible: action != null,
               child: GestureDetector(
                   onTap: onRetry,
-                  child: Text(
-                    action ?? '',
-                    style: const TextStyle(
-                        fontWeight: FontWeight.w500,
-                        fontSize: 15,
-                        color: Colors.deepPurple),
+                  child: Container(
+                    padding: const EdgeInsets.only(
+                        right: 22, left: 22, top: 8, bottom: 8),
+                    decoration: const BoxDecoration(
+                        color: Colors.deepPurple,
+                        borderRadius: BorderRadius.all(Radius.circular(32))),
+                    child: Text(
+                      action ?? '',
+                      textAlign: TextAlign.start,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 15,
+                          color: Colors.white),
+                    ),
                   )),
             ),
           ],
