@@ -1,6 +1,7 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:newsapp/data/api.dart';
 import 'package:newsapp/data/models/article.dart';
+import 'package:newsapp/data/models/articles_request_params.dart';
 
 final dataRepositoryProvider = Provider<DataRespository>((ref) {
   final api = ref.watch(apiProvider);
@@ -8,8 +9,7 @@ final dataRepositoryProvider = Provider<DataRespository>((ref) {
 });
 
 abstract class DataRespository {
-  Future<List<Article>> articles(
-      String keywords, DateTime from, DateTime to, ArticleSortBy sortBy);
+  Future<List<Article>> articles(ArticlesParams params);
 }
 
 class DataRespositoryImp implements DataRespository {
@@ -18,11 +18,7 @@ class DataRespositoryImp implements DataRespository {
   DataRespositoryImp(this.api);
 
   @override
-  Future<List<Article>> articles(
-          String keywords, DateTime from, DateTime to, ArticleSortBy sortBy) =>
-      api
-          .articles(keywords, from.toIso8601String().split('T').first,
-              to.toIso8601String().split('T').first, sortBy.name)
-          .then((value) =>
-              value.where((element) => element.title != '[Removed]').toList());
+  Future<List<Article>> articles(ArticlesParams params) =>
+      api.articles(params).then((value) =>
+          value.where((element) => element.title != '[Removed]').toList());
 }

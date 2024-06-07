@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:newsapp/data/models/article.dart';
+import 'package:newsapp/data/models/articles_request_params.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 final dioProvider = Provider((ref) {
@@ -9,6 +10,11 @@ final dioProvider = Provider((ref) {
   ));
   dio.interceptors.clear();
   dio.interceptors.add(PrettyDioLogger());
+  dio.interceptors.add(InterceptorsWrapper(onRequest:
+      (RequestOptions options, RequestInterceptorHandler handler) async {
+    options.queryParameters['apiKey'] = 'f1a159e96d5e4117b87411b14bc2007f';
+    return handler.next(options);
+  }));
   return dio;
 });
 
@@ -18,17 +24,9 @@ class NewsApi {
   final Dio _dio;
   NewsApi(this._dio);
 
-  Future<List<Article>> articles(
-          String keywords, String from, String to, String sortBy) =>
-      _dio.get('everything', queryParameters: {
-        'q': keywords,
-        'sortBy': sortBy,
-        'from': from,
-        'to': to,
-        'language': 'en',
-        'pageSize': 5,
-        'apiKey': 'e5b33812714c45c08398629e63de1076'
-      }).then((value) => List.from(value.data['articles'])
+  Future<List<Article>> articles(ArticlesParams params) => _dio
+      .get('everything', queryParameters: params.toJson())
+      .then((value) => List.from(value.data['articles'])
           .map((e) => Article.fromJson(e))
           .toList());
 }
