@@ -4,9 +4,12 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:newsapp/notifier/articles_notifier.dart';
 import 'package:newsapp/view/article_datail_screen.dart';
 import 'package:newsapp/view/article_item.dart';
+import 'package:newsapp/view/common/state_view.dart';
 
 class ArticlesScreen extends HookConsumerWidget {
   const ArticlesScreen({super.key});
+
+  static const keyWords = ['Microsoft', 'Apple', 'Google', 'Tesla'];
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -26,7 +29,7 @@ class ArticlesScreen extends HookConsumerWidget {
         }
       });
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        notifier.fetch(keywords: ['Microsoft', 'Apple', 'Google', 'Tesla']);
+        notifier.fetch(keywords: keyWords);
       });
       return null;
     }, [scrollController]);
@@ -82,7 +85,16 @@ class ArticlesScreen extends HookConsumerWidget {
               ? const Center(
                   child: CircularProgressIndicator(),
                 )
-              : Container(),
+              : (state.isError())
+                  ? StateView.error(
+                      action: 'Try again',
+                      image: 'assets/error_placeholder.png',
+                      description: state.mesage,
+                      onRetry: () {
+                        notifier.fetch(keywords: keyWords);
+                      },
+                    )
+                  : Container(),
     );
   }
 }

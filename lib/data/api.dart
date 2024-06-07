@@ -4,6 +4,11 @@ import 'package:newsapp/data/models/article.dart';
 import 'package:newsapp/data/models/articles_request_params.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
+class FailureException implements Exception {
+  String massage;
+  FailureException({required this.massage});
+}
+
 final dioProvider = Provider((ref) {
   Dio dio = Dio(BaseOptions(
     baseUrl: "https://newsapi.org/v2/",
@@ -25,8 +30,18 @@ class NewsApi {
   NewsApi(this._dio);
 
   Future<List<Article>> articles(ArticlesParams params) => _dio
-      .get('everything', queryParameters: params.toJson())
-      .then((value) => List.from(value.data['articles'])
-          .map((e) => Article.fromJson(e))
-          .toList());
+          .get('everything', queryParameters: params.toJson())
+          .then((value) => List.from(value.data['articles'])
+              .map((e) => Article.fromJson(e))
+              .toList())
+          .catchError((e) {
+        if (e is DioException) {
+          if (e.response?.data != null && e.response?.data is Map) {
+            throw FailureException(
+                massage:
+                    e.response?.data['message'] ?? 'Something went wrong!');
+          }
+        }
+        throw e;
+      });
 }

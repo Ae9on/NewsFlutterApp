@@ -20,7 +20,7 @@ class ArticleItem extends StatelessWidget {
         Stack(
           children: [
             Hero(
-                tag: data,
+                tag: data.article,
                 child: ArticleCover(uri: data.article.urlToImage ?? '')),
             Positioned(
               left: 10,

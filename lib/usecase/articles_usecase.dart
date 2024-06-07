@@ -21,14 +21,12 @@ class LatestCompaniesArticlesUseCase {
                     page: page))
                 .then((value) {
               fdata[keywords.indexOf(kw)] = value;
-            }).catchError((e) {
-              fdata[keywords.indexOf(kw)] = [];
             }))
         .toList();
     return Future.wait(reqs).then((value) {
       return fdata;
     }).catchError((e) {
-      if (fdata.isEmpty) {
+      if (fdata.expand((element) => element).isEmpty) {
         throw e;
       } else {
         return fdata;

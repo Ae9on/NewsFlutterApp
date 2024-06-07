@@ -1,4 +1,5 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:newsapp/data/api.dart';
 import 'package:newsapp/notifier/article_viewmodel.dart';
 import 'package:newsapp/notifier/base.dart';
 import 'package:newsapp/usecase/articles_usecase.dart';
@@ -44,8 +45,12 @@ class ArticlesNotifier extends StateNotifier<Response<List<ArticleViewModel>>> {
       state = Response.success(data: data);
       isLoading = false;
     }).catchError((e) {
-      state = Response.error();
       isLoading = false;
+      if (e is FailureException) {
+        state = Response.error(msg: e.massage);
+        return;
+      }
+      state = Response.error(msg: 'Something went wrong!');
     });
   }
 }
