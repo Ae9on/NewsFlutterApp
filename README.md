@@ -41,7 +41,7 @@ The project follows a clean architecture pattern, with layers organized as follo
 -   `data` (Data layer): Handles data fetching and persistence.
 -   `domain (usecases)`  (Domain layer): Represents business logic and core entities.
 -   `presentation (notifiers)` (Presentation layer): Contains river pod notifiers that interacts with the domain layer.
--   `view` (Presentation layer): Contains common widgets and screens
+-   `view` (UI layer): Contains common widgets and screens
 
 ## Third Parties
 
