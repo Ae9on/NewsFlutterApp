@@ -1,5 +1,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:newsapp/data/api.dart';
+import 'package:newsapp/exceptions.dart';
 import 'package:newsapp/notifier/viewmodels/article_viewmodel.dart';
 import 'package:newsapp/notifier/base.dart';
 import 'package:newsapp/usecase/latest_news_usecase.dart';

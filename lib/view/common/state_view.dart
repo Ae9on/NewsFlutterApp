@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 enum StateType {
@@ -34,6 +33,7 @@ class StateView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var theme = Theme.of(context);
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(32.0),
@@ -53,14 +53,15 @@ class StateView extends StatelessWidget {
             ),
             Text(
               title!,
-              style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
+              style: theme.textTheme.titleLarge
+                  ?.copyWith(fontWeight: FontWeight.w500),
             ),
             const SizedBox(
-              height: 12,
+              height: 4,
             ),
             Text(
               description!,
-              style: const TextStyle(fontWeight: FontWeight.w300, fontSize: 14),
+              style: theme.textTheme.titleSmall,
               textAlign: TextAlign.center,
             ),
             const SizedBox(
@@ -79,10 +80,8 @@ class StateView extends StatelessWidget {
                     child: Text(
                       action ?? '',
                       textAlign: TextAlign.start,
-                      style: const TextStyle(
-                          fontWeight: FontWeight.w400,
-                          fontSize: 15,
-                          color: Colors.white),
+                      style: theme.textTheme.labelLarge
+                          ?.copyWith(color: Colors.white),
                     ),
                   )),
             ),

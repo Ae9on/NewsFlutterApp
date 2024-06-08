@@ -2,13 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:newsapp/data/models/article.dart';
 import 'package:newsapp/data/models/articles_request_params.dart';
+import 'package:newsapp/exceptions.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
-
-// Define a custom exception class for handling API errors
-class FailureException implements Exception {
-  String massage;
-  FailureException({required this.massage});
-}
 
 // Provider for creating a Dio instance with configuration
 final dioProvider = Provider((ref) {

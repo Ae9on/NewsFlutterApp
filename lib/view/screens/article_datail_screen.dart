@@ -14,6 +14,8 @@ class ArticleDetailScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     var state = ref.watch(articlesNotifier);
     var theme = Theme.of(context);
+    const infoTextStyle = TextStyle(
+        fontWeight: FontWeight.w700, color: Colors.black54, fontSize: 15);
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -40,8 +42,8 @@ class ArticleDetailScreen extends ConsumerWidget {
                   Text(
                     data.article.title ?? '',
                     textAlign: TextAlign.start,
-                    style: theme.textTheme.titleLarge?.copyWith(
-                        fontWeight: FontWeight.w800, fontSize: 21, height: 1.5),
+                    style: theme.textTheme.titleLarge
+                        ?.copyWith(fontWeight: FontWeight.w700, height: 1.5),
                   ),
                   const SizedBox(
                     height: 12,
@@ -49,16 +51,10 @@ class ArticleDetailScreen extends ConsumerWidget {
                   if (data.article.author != null)
                     Row(
                       children: [
-                        const Text('Written by ',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                color: Colors.black45,
-                                fontSize: 15)),
+                        const Text('Written by ', style: infoTextStyle),
                         Text(data.article.author!,
-                            style: const TextStyle(
-                                fontWeight: FontWeight.w700,
-                                color: Colors.deepPurple,
-                                fontSize: 15)),
+                            style: infoTextStyle.copyWith(
+                                color: theme.colorScheme.primary)),
                       ],
                     ),
                   const SizedBox(
@@ -72,16 +68,10 @@ class ArticleDetailScreen extends ConsumerWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          const Text('Published at ',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.black45,
-                                  fontSize: 15)),
+                          const Text('Published at ', style: infoTextStyle),
                           Text(data.article.source?.name ?? '',
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.w700,
-                                  color: Colors.deepPurple,
-                                  fontSize: 15)),
+                              style: infoTextStyle.copyWith(
+                                  color: theme.colorScheme.primary)),
                           const SizedBox(
                             width: 2,
                           ),

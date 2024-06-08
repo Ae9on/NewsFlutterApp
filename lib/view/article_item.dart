@@ -16,12 +16,6 @@ class ArticleItem extends StatelessWidget {
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
     return Card(
-      elevation: 24,
-      shadowColor: Colors.black45,
-      surfaceTintColor: Colors.white,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(0.0),
-      ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,

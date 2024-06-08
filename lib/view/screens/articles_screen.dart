@@ -61,7 +61,7 @@ class ArticlesScreen extends HookConsumerWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Recent News',
+                                'Recent Articles',
                                 style: theme.textTheme.headlineMedium
                                     ?.copyWith(fontWeight: FontWeight.w800),
                               ),

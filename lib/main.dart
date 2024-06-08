@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         '/articles': (ctx) => const ArticlesScreen(),
       },
       title: 'Flutter Demo',
-      theme: AppTheme.lightThemeData(),
+      theme: AppTheme.mainTheme(),
       initialRoute: '/',
     );
   }
