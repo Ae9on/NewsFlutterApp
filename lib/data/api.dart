@@ -38,14 +38,14 @@ class NewsApi {
               .map((e) => Article.fromJson(e))
               .toList())
           .catchError((e) {
-        if (e is DioException) {
+        if (e is DioException &&
+            e.response?.data != null &&
+            e.response?.data is Map) {
           // Check if the error response contains an error message
-          if (e.response?.data != null && e.response?.data is Map) {
-            throw FailureException(
-                massage:
-                    e.response?.data['message'] ?? 'Something went wrong!');
-          }
+          throw FailureException(
+              massage: e.response?.data['message'] ?? 'Something went wrong!');
+        } else {
+          throw FailureException(massage: 'Something went wrong!');
         }
-        throw e;
       });
 }
