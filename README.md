@@ -4,6 +4,12 @@ This is a Flutter project implementing a simple news app that retrieves and disp
 
 # Screenshots
 
+![enter image description here](./screenshots/splash.png)
+![enter image description here](./screenshots/article_screen.png)
+![enter image description here](./screenshots/detal_screen.png)
+![enter image description here](./screenshots/error_screen.png)
+
+
 # Features
 
  - Newsfeed for latest thech companies news
