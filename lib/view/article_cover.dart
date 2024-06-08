@@ -1,30 +1,25 @@
 import 'package:flutter/material.dart';
 
 class ArticleCover extends StatelessWidget {
-  const ArticleCover({
-    super.key,
-    required this.uri,
-  });
+  const ArticleCover({super.key, required this.uri, this.ratio = 2.2});
 
   final String uri;
+  final double ratio;
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(16),
-      child: AspectRatio(
-          aspectRatio: 16 / 9,
-          child: FadeInImage.assetNetwork(
-            image: uri,
-            imageErrorBuilder: (ctx, _, e) {
-              return Image.asset(
-                'assets/placeholder.png',
-                fit: BoxFit.cover,
-              );
-            },
-            placeholder: 'assets/placeholder.png',
-            fit: BoxFit.cover,
-          )),
-    );
+    return AspectRatio(
+        aspectRatio: ratio,
+        child: FadeInImage.assetNetwork(
+          image: uri,
+          imageErrorBuilder: (ctx, _, e) {
+            return Image.asset(
+              'assets/placeholder.png',
+              fit: BoxFit.cover,
+            );
+          },
+          placeholder: 'assets/placeholder.png',
+          fit: BoxFit.cover,
+        ));
   }
 }

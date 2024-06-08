@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mockito/mockito.dart';
 import 'package:newsapp/notifier/viewmodels/article_viewmodel.dart';
 import 'package:newsapp/view/article_cover.dart';
 import 'package:timeago/timeago.dart' as timeago;
@@ -13,80 +14,83 @@ class ArticleItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Stack(
-          children: [
-            Hero(
-                tag: data,
-                child: ArticleCover(uri: data.article.urlToImage ?? '')),
-            Positioned(
-              left: 10,
-              top: 10,
-              child: Container(
-                padding: const EdgeInsets.only(
-                    right: 12, left: 12, top: 2, bottom: 2),
-                decoration: const BoxDecoration(
-                    color: Colors.deepPurple,
-                    borderRadius: BorderRadius.all(Radius.circular(32))),
-                child: Text(
-                  data.category,
+    var theme = Theme.of(context);
+    return Card(
+      elevation: 24,
+      shadowColor: Colors.black45,
+      surfaceTintColor: Colors.white,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(0.0),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Hero(
+              tag: data,
+              child: Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: ArticleCover(uri: data.article.urlToImage ?? ''),
+              )),
+          Padding(
+            padding:
+                const EdgeInsets.only(right: 12, left: 12, bottom: 12, top: 4),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  data.article.title ?? '',
+                  maxLines: 3,
                   textAlign: TextAlign.start,
-                  style: const TextStyle(
-                      fontWeight: FontWeight.w500,
-                      fontSize: 14.6,
-                      color: Colors.white),
+                  style: theme.textTheme.titleMedium
+                      ?.copyWith(fontWeight: FontWeight.w600, fontSize: 16),
                 ),
-              ),
+                const SizedBox(
+                  height: 8,
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text(data.article.source?.name ?? '',
+                        style: const TextStyle(
+                            fontWeight: FontWeight.w400,
+                            color: Colors.black87,
+                            fontSize: 12)),
+                    const SizedBox(
+                      height: 12,
+                      child: Padding(
+                        padding: EdgeInsets.only(left: 8.0, right: 8),
+                        child: VerticalDivider(
+                          width: 1,
+                          thickness: 1.6,
+                        ),
+                      ),
+                    ),
+                    Text(timeago.format(data.article.publishedAt!),
+                        style: const TextStyle(
+                            fontWeight: FontWeight.w400,
+                            color: Colors.black87,
+                            fontSize: 12)),
+                    const Expanded(child: SizedBox()),
+                    Text(
+                      '#${data.category}',
+                      textAlign: TextAlign.start,
+                      style: theme.textTheme.labelMedium?.copyWith(
+                          color: Colors.deepPurple,
+                          fontWeight: FontWeight.w600),
+                    )
+                  ],
+                ),
+                const SizedBox(
+                  height: 6,
+                ),
+              ],
             ),
-          ],
-        ),
-        const SizedBox(
-          height: 12,
-        ),
-        Padding(
-          padding: const EdgeInsets.only(right: 6.0, left: 6),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(data.article.source?.name ?? '',
-                      style: const TextStyle(
-                          fontWeight: FontWeight.w400,
-                          color: Colors.black45,
-                          fontSize: 14)),
-                  const SizedBox(
-                    width: 2,
-                  ),
-                  Text(timeago.format(data.article.publishedAt!),
-                      style: const TextStyle(
-                          fontWeight: FontWeight.w400,
-                          color: Colors.black45,
-                          fontSize: 14)),
-                ],
-              ),
-              const SizedBox(
-                height: 6,
-              ),
-              Text(
-                data.article.title ?? '',
-                textAlign: TextAlign.start,
-                style: const TextStyle(
-                    fontWeight: FontWeight.w500, fontSize: 17.5),
-              ),
-              const SizedBox(
-                height: 6,
-              ),
-            ],
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
