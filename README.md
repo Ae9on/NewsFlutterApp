@@ -3,7 +3,7 @@
 This is a Flutter project implementing a simple news app that retrieves and displays the latest news articles for tech companies in English from yesterday to today using the News API ([https://newsapi.org/](https://newsapi.org/)).
 
 # Screenshots
-<img src = "./screenshots/splash.png" width ="200" /> <img src = "./screenshots/articles_screen.png" width ="200" /> <img src = "./screenshots/detail_screen.png" width ="200" /> <img src = "./screenshots/erro_screen.png" width ="200" />
+<img src = "./screenshots/splash.png" width ="200" /> <img src = "./screenshots/article_screen.png" width ="200" /> <img src = "./screenshots/detail_screen.png" width ="200" /> <img src = "./screenshots/error_screen.png" width ="200" />
 
 # Features
 
