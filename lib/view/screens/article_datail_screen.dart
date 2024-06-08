@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:newsapp/notifier/article_viewmodel.dart';
+import 'package:newsapp/notifier/viewmodels/article_viewmodel.dart';
 import 'package:newsapp/notifier/articles_notifier.dart';
 import 'package:newsapp/view/article_cover.dart';
 

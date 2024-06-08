@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:newsapp/view/articles_screen.dart';
+import 'package:newsapp/view/screens/articles_screen.dart';
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));
