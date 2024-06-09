@@ -10,6 +10,7 @@ This is a Flutter project implementing a simple news app that retrieves and disp
  - Newsfeed for latest thech companies news
  - Detail screen for every article
  - Pagination for newsfeed
+ - Caching for offline viewing of previously loaded news
  - Sequential arrangement based on company priority
  - Error handling and stateviews
  -  Remote API call and Caching for loaded data
@@ -50,9 +51,12 @@ The project follows a clean architecture pattern, with layers organized as follo
 Using declarative and reactive programming, Riverpod takes care of a large part of your application's logic for you. It can perform network-requests with built-in error handling and caching, while automatically re-fetching data when necessary.
 
 - [flutter_hook](https://pub.dev/packages/flutter_hooks) : Hooks are a new kind of object that manage the life-cycle of a `Widget`. They exist for one reason: increase the code-sharing _between_ widgets by removing duplicates.
+- [Hive](https://pub.dev/packages/hive): Hive is a powerful and popular package for Flutter apps that acts as a lightweight and fast NoSQL database for local data storage.
  - [dio](https://pub.dev/packages/dio) : A powerful HTTP networking package for Dart/Flutter, supports Global configuration, Interceptors, FormData, Request cancellation, File uploading/downloading, Timeout, Custom adapters, Transformers, etc.
  - [intl](https://pub.dev/packages/intl) : Provides internationalization and localization facilities, including message translation, plurals and genders, date/number formatting and parsing, and bidirectional text.
  - [Mockito](https://pub.dev/packages/mockito): A mock framework inspired by Mockito with APIs for Fakes, Mocks, behavior verification, and stubbing.
+
+
 
 ## A short description about "Clean Architecture"
 
