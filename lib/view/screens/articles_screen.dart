@@ -10,7 +10,7 @@ import 'package:newsapp/view/common/state_view.dart';
 class ArticlesScreen extends HookConsumerWidget {
   const ArticlesScreen({super.key});
 
-  static const keyWords = ['Microsoft'];
+  static const keyWords = ['Microsoft', 'Apple', 'Google', 'Tesla'];
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

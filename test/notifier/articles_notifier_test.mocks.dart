@@ -62,7 +62,7 @@ class MockLatestCompaniesArticlesUseCase extends _i1.Mock
       );
 
   @override
-  _i4.Future<List<List<_i5.Article>>> call(
+  _i4.Future<List<_i5.Article>> call(
     List<String>? keywords,
     int? page,
   ) =>
@@ -74,7 +74,6 @@ class MockLatestCompaniesArticlesUseCase extends _i1.Mock
             page,
           ],
         ),
-        returnValue:
-            _i4.Future<List<List<_i5.Article>>>.value(<List<_i5.Article>>[]),
-      ) as _i4.Future<List<List<_i5.Article>>>);
+        returnValue: _i4.Future<List<_i5.Article>>.value(<_i5.Article>[]),
+      ) as _i4.Future<List<_i5.Article>>);
 }

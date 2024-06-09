@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mockito/mockito.dart';
-import 'package:newsapp/notifier/viewmodels/article_viewmodel.dart';
+import 'package:newsapp/data/models/article.dart';
 import 'package:newsapp/view/article_cover.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
@@ -10,7 +9,7 @@ class ArticleItem extends StatelessWidget {
     required this.data,
   });
 
-  final ArticleViewModel data;
+  final Article data;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +23,7 @@ class ArticleItem extends StatelessWidget {
               tag: data,
               child: Padding(
                 padding: const EdgeInsets.all(4.0),
-                child: ArticleCover(uri: data.article.urlToImage ?? ''),
+                child: ArticleCover(uri: data.urlToImage ?? ''),
               )),
           Padding(
             padding:
@@ -34,7 +33,7 @@ class ArticleItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  data.article.title ?? '',
+                  data.title ?? '',
                   maxLines: 3,
                   textAlign: TextAlign.start,
                   style: theme.textTheme.titleMedium
@@ -47,7 +46,7 @@ class ArticleItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Text(data.article.source?.name ?? '',
+                    Text(data.source?.name ?? '',
                         style: const TextStyle(
                             fontWeight: FontWeight.w400,
                             color: Colors.black87,
@@ -62,14 +61,14 @@ class ArticleItem extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Text(timeago.format(data.article.publishedAt!),
+                    Text(timeago.format(data.publishedAt!),
                         style: const TextStyle(
                             fontWeight: FontWeight.w400,
                             color: Colors.black87,
                             fontSize: 12)),
                     const Expanded(child: SizedBox()),
                     Text(
-                      '#${data.category}',
+                      '#${data.keyword}',
                       textAlign: TextAlign.start,
                       style: theme.textTheme.labelMedium?.copyWith(
                           color: Colors.deepPurple,

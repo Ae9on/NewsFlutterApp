@@ -6,9 +6,10 @@
 import 'dart:async' as _i3;
 
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:newsapp/data/api.dart' as _i2;
+import 'package:newsapp/data/local/local_repository.dart' as _i6;
 import 'package:newsapp/data/models/article.dart' as _i4;
 import 'package:newsapp/data/models/articles_request_params.dart' as _i5;
+import 'package:newsapp/data/remote/api.dart' as _i2;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -40,4 +41,42 @@ class MockNewsApi extends _i1.Mock implements _i2.NewsApi {
         ),
         returnValue: _i3.Future<List<_i4.Article>>.value(<_i4.Article>[]),
       ) as _i3.Future<List<_i4.Article>>);
+}
+
+/// A class which mocks [LocalDataRepository].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockLocalDataRepository extends _i1.Mock
+    implements _i6.LocalDataRepository {
+  MockLocalDataRepository() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i3.Future<dynamic> addArticles(List<_i4.Article>? data) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #addArticles,
+          [data],
+        ),
+        returnValue: _i3.Future<dynamic>.value(),
+      ) as _i3.Future<dynamic>);
+
+  @override
+  _i3.Future<List<_i4.Article>> fetchArticles() => (super.noSuchMethod(
+        Invocation.method(
+          #fetchArticles,
+          [],
+        ),
+        returnValue: _i3.Future<List<_i4.Article>>.value(<_i4.Article>[]),
+      ) as _i3.Future<List<_i4.Article>>);
+
+  @override
+  _i3.Future<dynamic> clearCache() => (super.noSuchMethod(
+        Invocation.method(
+          #clearCache,
+          [],
+        ),
+        returnValue: _i3.Future<dynamic>.value(),
+      ) as _i3.Future<dynamic>);
 }

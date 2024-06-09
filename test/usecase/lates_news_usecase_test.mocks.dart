@@ -40,4 +40,20 @@ class MockDataRespository extends _i1.Mock implements _i2.DataRespository {
         ),
         returnValue: _i3.Future<List<_i4.Article>>.value(<_i4.Article>[]),
       ) as _i3.Future<List<_i4.Article>>);
+
+  @override
+  _i3.Future<List<_i4.Article>> latestArticles(
+    List<String>? keywords,
+    int? page,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #latestArticles,
+          [
+            keywords,
+            page,
+          ],
+        ),
+        returnValue: _i3.Future<List<_i4.Article>>.value(<_i4.Article>[]),
+      ) as _i3.Future<List<_i4.Article>>);
 }

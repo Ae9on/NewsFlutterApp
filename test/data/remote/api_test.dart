@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:newsapp/data/api.dart';
+import 'package:newsapp/data/remote/api.dart';
 import 'package:newsapp/data/models/articles_request_params.dart';
 import 'package:newsapp/exceptions.dart';
 

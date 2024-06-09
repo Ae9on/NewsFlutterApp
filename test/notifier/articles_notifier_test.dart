@@ -3,7 +3,6 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:newsapp/data/models/article.dart';
 import 'package:newsapp/exceptions.dart';
-import 'package:newsapp/notifier/viewmodels/article_viewmodel.dart';
 import 'package:newsapp/notifier/articles_notifier.dart';
 import 'package:newsapp/notifier/base.dart';
 import 'package:newsapp/usecase/latest_news_usecase.dart';
@@ -22,19 +21,16 @@ void main() {
     });
 
     test('initial state is empty', () {
-      expect(notifier.state, Response.empty());
+      expect(notifier.state.isEmpty(), true);
     });
 
     test('fetches articles with keywords and updates state on success',
         () async {
       // Sample articles and view models
       final articles = [Article(title: 'Article 1')];
-      final viewModels = [
-        ArticleViewModel(article: articles[0], category: 'keyword1')
-      ];
 
       // Mock use case behavior
-      when(mockUseCase(any, any)).thenAnswer((_) => Future.value([articles]));
+      when(mockUseCase(any, any)).thenAnswer((_) => Future.value(articles));
 
       final keywords = ['keyword1'];
       await notifier.fetch(keywords: keywords);

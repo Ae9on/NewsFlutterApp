@@ -34,9 +34,11 @@ class NewsApi {
   // Method to fetch a list of articles based on provided parameters
   Future<List<Article>> articles(ArticlesParams params) => _dio
           .get('everything', queryParameters: params.toJson())
-          .then((value) => List.from(value.data['articles'])
-              .map((e) => Article.fromJson(e))
-              .toList())
+          .then((value) => List.from(value.data['articles']).map((e) {
+                var model = Article.fromJson(e);
+                model.keyword = params.keyword;
+                return model;
+              }).toList())
           .catchError((e) {
         if (e is DioException &&
             e.response?.data != null &&

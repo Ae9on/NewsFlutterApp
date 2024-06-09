@@ -1,24 +1,23 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:newsapp/data/api.dart';
+import 'package:newsapp/data/models/article.dart';
+import 'package:newsapp/data/remote/api.dart';
 import 'package:newsapp/exceptions.dart';
-import 'package:newsapp/notifier/viewmodels/article_viewmodel.dart';
 import 'package:newsapp/notifier/base.dart';
 import 'package:newsapp/usecase/latest_news_usecase.dart';
 
 // Provider for creating an ArticlesNotifier instance
 final articlesNotifier =
-    StateNotifierProvider<ArticlesNotifier, Response<List<ArticleViewModel>>>(
-        (ref) =>
-            ArticlesNotifier(useCase: ref.watch(latestArticleUsecaseProvider)));
+    StateNotifierProvider<ArticlesNotifier, Response<List<Article>>>((ref) =>
+        ArticlesNotifier(useCase: ref.watch(latestArticleUsecaseProvider)));
 
-class ArticlesNotifier extends StateNotifier<Response<List<ArticleViewModel>>> {
+class ArticlesNotifier extends StateNotifier<Response<List<Article>>> {
   LatestCompaniesArticlesUseCase useCase;
 
   ArticlesNotifier({required this.useCase}) : super(Response.empty());
 
   // State variables to track data and loading state
   List<String> keywords = []; // List of keywords to fetch articles for
-  List<ArticleViewModel> data = []; // List to store fetched articles
+  List<Article> data = []; // List to store fetched articles
   int page = 1; // Current page number for pagination
   bool isLoading = false; // Flag to indicate if data is being fetched
 
@@ -28,7 +27,7 @@ class ArticlesNotifier extends StateNotifier<Response<List<ArticleViewModel>>> {
   /// keyword list, resets page number, and clears fetched data. It then fetches articles for
   /// the new keywords. If no keywords are provided, it does nothing.
   /// The method uses the `useCase` to fetch articles and populates the `data` list with
-  /// `ArticleViewModel` objects. It updates the state based on success, error, or loading status.
+  /// `Article` objects. It updates the state based on success, error, or loading status.
   fetch({List<String> keywords = const []}) async {
     state = Response.progress();
     // Update keywords and page if new keywords provided
@@ -47,15 +46,7 @@ class ArticlesNotifier extends StateNotifier<Response<List<ArticleViewModel>>> {
     useCase.call(this.keywords, page).then((value) {
       page++;
       // Process fetched articles and convert them to ArticleViewModel objects
-      data.addAll(value
-          .expand((element) => (element.isEmpty)
-              ? <ArticleViewModel>[]
-              : element
-                  .map((article) => ArticleViewModel(
-                      article: article,
-                      category: this.keywords[value.indexOf(element)]))
-                  .toList())
-          .toList());
+      data.addAll(value);
       state = Response.success(data: data);
       isLoading = false;
     }).catchError((e) {

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:newsapp/notifier/viewmodels/article_viewmodel.dart';
+import 'package:newsapp/data/models/article.dart';
 import 'package:newsapp/notifier/articles_notifier.dart';
 import 'package:newsapp/view/article_cover.dart';
 import 'package:newsapp/view/common/logo_view.dart';
 
 class ArticleDetailScreen extends ConsumerWidget {
   ArticleDetailScreen({super.key, required this.data});
-  ArticleViewModel data;
+  Article data;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -30,7 +30,7 @@ class ArticleDetailScreen extends ConsumerWidget {
             Hero(
                 tag: data,
                 child: ArticleCover(
-                  uri: data.article.urlToImage ?? '',
+                  uri: data.urlToImage ?? '',
                   ratio: 1.6,
                 )),
             Padding(
@@ -40,7 +40,7 @@ class ArticleDetailScreen extends ConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    data.article.title ?? '',
+                    data.title ?? '',
                     textAlign: TextAlign.start,
                     style: theme.textTheme.titleLarge
                         ?.copyWith(fontWeight: FontWeight.w700, height: 1.5),
@@ -48,11 +48,11 @@ class ArticleDetailScreen extends ConsumerWidget {
                   const SizedBox(
                     height: 12,
                   ),
-                  if (data.article.author != null)
+                  if (data.author != null)
                     Row(
                       children: [
                         const Text('Written by ', style: infoTextStyle),
-                        Text(data.article.author!,
+                        Text(data.author!,
                             style: infoTextStyle.copyWith(
                                 color: theme.colorScheme.primary)),
                       ],
@@ -69,16 +69,14 @@ class ArticleDetailScreen extends ConsumerWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           const Text('Published at ', style: infoTextStyle),
-                          Text(data.article.source?.name ?? '',
+                          Text(data.source?.name ?? '',
                               style: infoTextStyle.copyWith(
                                   color: theme.colorScheme.primary)),
                           const SizedBox(
                             width: 2,
                           ),
                           const Expanded(child: SizedBox()),
-                          Text(
-                              DateFormat.yMMMMd()
-                                  .format(data.article.publishedAt!),
+                          Text(DateFormat.yMMMMd().format(data.publishedAt!),
                               style: const TextStyle(
                                   fontWeight: FontWeight.w400,
                                   color: Colors.black45,
@@ -91,7 +89,7 @@ class ArticleDetailScreen extends ConsumerWidget {
                     height: 16,
                   ),
                   Text(
-                    data.article.content ?? '',
+                    data.content ?? '',
                     textAlign: TextAlign.start,
                     style: const TextStyle(
                         fontWeight: FontWeight.w400,

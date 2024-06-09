@@ -1,3 +1,7 @@
+import 'package:hive/hive.dart';
+
+part 'article.g.dart';
+
 enum ArticleSortBy {
   publishedAt("publishedAt");
 
@@ -5,15 +9,26 @@ enum ArticleSortBy {
   const ArticleSortBy(this.name);
 }
 
+@HiveType(typeId: 0)
 class Article {
+  @HiveField(0)
   Source? source;
+  @HiveField(1)
   String? author;
+  @HiveField(2)
   String? title;
+  @HiveField(3)
   String? description;
+  @HiveField(4)
   String? url;
+  @HiveField(5)
   String? urlToImage;
+  @HiveField(6)
   DateTime? publishedAt;
+  @HiveField(7)
   String? content;
+  @HiveField(8)
+  String? keyword;
 
   Article(
       {this.source,
@@ -23,7 +38,8 @@ class Article {
       this.url,
       this.urlToImage,
       this.publishedAt,
-      this.content});
+      this.content,
+      this.keyword});
 
   factory Article.fromJson(Map<String, dynamic> json) {
     return Article(
@@ -52,12 +68,16 @@ class Article {
     data["urlToImage"] = urlToImage;
     data["publishedAt"] = publishedAt;
     data["content"] = content;
+    data["keyword"] = keyword;
     return data;
   }
 }
 
+@HiveType(typeId: 1)
 class Source {
+  @HiveField(0)
   dynamic id;
+  @HiveField(1)
   String? name;
 
   Source({this.id, this.name});
